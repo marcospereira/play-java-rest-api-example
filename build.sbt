@@ -2,6 +2,11 @@ name := """play-java-rest-api-example"""
 
 version := "2.6.x"
 
+def gatlingVersion(scalaBinVer: String): String = scalaBinVer match {
+  case "2.11" => "2.2.5"
+  case "2.12" => "2.3.0"
+}
+
 inThisBuild(
   List(
     scalaVersion := "2.12.4",
@@ -32,8 +37,8 @@ libraryDependencies += "io.dropwizard.metrics" % "metrics-core" % "3.2.1"
 libraryDependencies += "com.palominolabs.http" % "url-builder" % "1.1.0"
 libraryDependencies += "net.jodah" % "failsafe" % "1.0.3"
 
-libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.3.0" % Test
-libraryDependencies += "io.gatling" % "gatling-test-framework" % "2.3.0" % Test
+libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % gatlingVersion(scalaBinaryVersion.value) % Test
+libraryDependencies += "io.gatling" % "gatling-test-framework" % gatlingVersion(scalaBinaryVersion.value) % Test
 
 PlayKeys.externalizeResources := false
 
